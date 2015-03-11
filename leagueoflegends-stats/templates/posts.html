@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="header">
+        <h3 class="text-muted">Summoner Info</h3>
+    </div>
+
+    <div class="well">
+        <form class="form-horizontal" name="summonerForm" ng-if="!haveSummoner" ng-submit="fetchSummoner()">
+            <div class="form-group">
+                <div class="col-sm-1"></div>
+                <label for="summonerName" class="col-sm-3 control-label">Summoner Name</label>
+
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="summonerName" name="summonerName" ng-model="summonerName">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit">Go!</button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+        </form>
+        <div class="row-fluid" ng-if="haveSummoner">
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-9 text-right">
+                    <b class="text-muted">Not the summoner you were looking for?&nbsp;&nbsp;</b>
+                    <button type="button" class="btn btn-info searchAgain" ng-click="resetSearch()">Search Again
+                    </button>
+                </div>
+            </div>
+
+            <div class="well">
+                <div class="row">
+                    <div class="col-sm-2 center">
+                        <div><b>Level</b><br> <span class="badge level">{{summoner.summonerLevel}}</span></div>
+                    </div>
+                    <div class="col-sm-8 center">
+                        <div>{{summoner.name}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     <div class="header">
+        <h3 class="text-muted">Champion Info</h3>
+    </div>
+     <div class="well">
+        <button ng-click="getChampion()" class="btn btn-success btn-lg btn-block">Get champions for North America</button>
+        <div class="row-fluid">
+         <div class="row">
+            <div class="animate-repeat floatLeft col-sm-3" ng-repeat="champ in champion">
+                <h4>{{champ.name}}</h4>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="well">
+    	<h1>Recent Posts</h1>
+		<form role='form'>
+			<div class='form-group'>
+				<div class='input-group'>
+					<input ng-model='postBody' class='form-control' />
+	        <span class='input-group-btn'>
+	          <button ng-click='addPost()' class='btn btn-default'>Tweet!</button>
+	        </span>
+				</div>
+			</div>
+		</form>
+		<ul class='list-group'>
+			<li ng-repeat="post in posts | orderBy:'-date'" class='list-group-item'>
+				<strong>@{{ post.username }}</strong>
+				<span>{{ post.body }}</span>
+			</li>
+		</ul>
+
+    </div>
+	
+</div>
+
